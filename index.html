@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Chat Socket</title>
+    <meta name="viewport" content="width=320, user-scalable=no">
+  </head>
+  <body style="margin: 0;">
+    <textarea style="max-width: 320px; width: 320px; height: 160px; max-height: 160px; display: block;"></textarea>
+    <button style="width: 320px; height: 32px; display: block;">Отправить</button>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <script>
+      var socket = io();
+      var textarea = document.querySelector('textarea');
+      var button = document.querySelector('button');
+      
+      button.onclick = function(event) { socket.emit('changed textarea', textarea.value) }
+      
+      socket.on('changed textarea', function(text){
+        textarea.value = text;
+      });
+    </script>
+  </body>
+</html>
